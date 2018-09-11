@@ -1,0 +1,13 @@
+#tekstBoks{
+	display: flex;
+	flex-direction: row;
+	border: solid;
+	width: 50%;
+	margin: auto;
+	height: auto;
+	flex-wrap: no-wrap;
+}
+
+#pResult{
+	margin: auto;
+}
