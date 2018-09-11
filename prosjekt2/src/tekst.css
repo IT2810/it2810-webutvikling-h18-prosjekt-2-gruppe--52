@@ -1,13 +1,13 @@
 #tekstBoks{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	border: solid;
 	width: 50%;
 	margin: auto;
-	height: auto;
+	height: 300px;
 	flex-wrap: no-wrap;
 }
 
-#pResult{
+.pResult{
 	margin: auto;
 }
