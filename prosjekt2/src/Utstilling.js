@@ -10,6 +10,8 @@ class Utstilling extends React.Component {
 			visible2: false,
 			visible3: false,
 			visible4: false,
+			finished: false,
+			
 		}
 	}
 	
@@ -17,7 +19,7 @@ class Utstilling extends React.Component {
 		this.setState({visible1: true,
 					   visible2: false,
 					   visible3: false,
-					   visible4: false});
+					   visible4: false,});
 	}
 	utstilling2(){
 		this.setState({visible1: false,
@@ -40,13 +42,14 @@ class Utstilling extends React.Component {
 	
 	
 	render(){
+
 		return (
 		<div>
 		<input type="button" value="Utstilling 1" onClick={() => this.utstilling1()}/>
 		<input type="button" value="Utstilling 2" onClick={() => this.utstilling2()}/>
 		<input type="button" value="Utstilling 3" onClick={() => this.utstilling3()}/>
 		<input type="button" value="Utstilling 4" onClick={() => this.utstilling4()}/>
-		<Tekst visible1={this.state.visible1} visible2={this.state.visible2} visible3={this.state.visible3} visible4={this.state.visible4}
+		<Tekst visible1={this.state.visible1} visible2={this.state.visible2} visible3={this.state.visible3} visible4={this.state.visible4} finished={this.state.finished}
 		kategori1="Reklame" kategori2="Visdomsord" kategori3="Krigsrop"/>
 		</div>
 		)
