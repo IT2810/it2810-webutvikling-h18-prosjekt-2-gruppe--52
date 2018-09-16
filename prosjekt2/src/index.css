@@ -1,5 +1,19 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.Tab:focus {
+    outline: 0;
+}
+
+.Tab.Inactive {
+    background-color: #cec8ca;
+    border-color: #cec8ca;
+}
+
+.Tab.Active {
+    background-color: #f1f5fc;
+    border-color: #f1f5fc;
 }
