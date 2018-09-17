@@ -9,7 +9,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        let textCategories = ['textcat1', 'textcat2', 'textcat3'], // TODO: change these to actual category strings
+        let textCategories = ['commercial', 'philosophical', 'shouts'], // TODO: change these to actual category strings
             imageCategories = ['imagecat1', 'imagecat2', 'imagecat3'], // TODO: change these to actual category strings
             audioCategories = ['household item', 'spooky', 'vehicles'];
 
@@ -19,16 +19,21 @@ class App extends Component {
             imageCategoryNum: 0,
             audioCategoryNum: 0,
 
-            textCategories: textCategories, // TODO: change these to actual category strings
+            textCategories: ['commercial', 'philosophical', 'shouts'], // TODO: change these to actual category strings
             imageCategories: imageCategories, // TODO: change these to actual category strings
             audioCategories: ['household item', 'spooky', 'vehicles'],
 
             textFiles: [ // TODO: when changing category strings, make these names the same
-                ['file1', 'file2', 'file3', 'file4'], // TODO: make these the actual file names
-                ['file1', 'file2', 'file3', 'file4'],
-                ['file1', 'file2', 'file3', 'file4']
+                ['commercial1.json', 'commercial2.json', 'commercial3.json', 'commercial4.json'], // TODO: make these the actual file names
+                ['philosophical1.json', 'philosophical2.json', 'philosophical3.json', 'philosophical4.json'],
+                ['shouts1.json', 'shouts2.json', 'shouts3.json', 'shouts4.json']
             ],
-            textData: Array(3).fill(Array(4).fill(null)),
+			
+            textData: [
+				["","","",""],
+				["","","",""],
+				["","","",""]
+			],
 
             imageFiles: [ // TODO: when changing category strings, make these names the same
                 ['file1', 'file2', 'file3', 'file4'], // TODO: make these the actual file names
@@ -48,7 +53,6 @@ class App extends Component {
     }
 
     render() {
-
         return (
 
             <div className="App">
@@ -106,8 +110,10 @@ class App extends Component {
         );
     }
 
-    changeTextCategory = (categoryNum) => {
+    changeTextCategory = (categoryNum) => {	
+		this.saveText(categoryNum,this.state.activeTab);
         this.setState({textCategoryNum: categoryNum});
+		
     };
 
     changeImageCategory = (categoryNum) => {
@@ -121,16 +127,37 @@ class App extends Component {
 
     changeTab = (tabNumber) => {
         this.setState({
-            activeTab: tabNumber
-        },
-            () => this.audioRef.load()
+            activeTab: tabNumber,
+			
+        },			
+			//() => this.audioRef.load(),
+			() => this.saveText(this.state.textCategoryNum,tabNumber)
+			
+			
         );
+		
 
     };
+	
 
     saveText(categoryNum, tabNumber) {
+		console.log("saving");
+		let stateCopy = Object.assign({}, this.state);
+		fetch("text/"+this.state.textCategories[categoryNum]+"/"+this.state.textFiles[categoryNum][tabNumber-1]).then(response => response.json())
+		.then(result => stateCopy.textData[categoryNum][tabNumber-1]=result.tekst);
+	
+		this.setState(stateCopy);
+		}
+	
+	componentDidMount(){
+		let stateCopy = Object.assign({}, this.state);
+		fetch("text/"+this.state.textCategories[0]+"/"+this.state.textFiles[0][0]).then(response => response.json())
+		.then(result => stateCopy.textData[0][0]=result.tekst);
+		this.setState(stateCopy);
+		}		
+	
 
-    }
+    
 
     saveImage(categoryNum, tabNumber) {
 
