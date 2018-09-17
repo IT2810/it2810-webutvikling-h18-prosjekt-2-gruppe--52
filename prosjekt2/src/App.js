@@ -130,8 +130,7 @@ class App extends Component {
             activeTab: tabNumber,
 			
         },			
-			//() => this.audioRef.load(),
-			() => this.saveText(this.state.textCategoryNum,tabNumber)
+			() => {this.audioRef.load(); this.saveText(this.state.textCategoryNum,tabNumber)},
 			
 			
         );
