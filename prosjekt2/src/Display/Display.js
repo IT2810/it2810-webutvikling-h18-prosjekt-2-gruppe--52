@@ -6,6 +6,7 @@ import Audio from './Audio';
 
 class Display extends Component {
 
+
     getAudioPath() {
 
         let audioCategoryName = this.props.audioCategories[this.props.audioCategoryNum],
@@ -16,9 +17,7 @@ class Display extends Component {
 	
 
     render() {
-		//console.log(this.props.textData);
-		//console.log(this.props.activeTab);
-		//console.log(this.props.textCategoryNum);
+
 		
         return(
             <div>
