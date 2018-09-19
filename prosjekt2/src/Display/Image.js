@@ -5,7 +5,7 @@ class Image extends Component {
 
     render() {
         return(
-            <p>TODO: Image</p>
+            <img src={"img/" + this.props.imageCategory + "/" + this.props.activeTab + ".svg"} />
         );
     }
 }

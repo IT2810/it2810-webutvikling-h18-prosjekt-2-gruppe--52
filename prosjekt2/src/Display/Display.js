@@ -14,17 +14,17 @@ class Display extends Component {
 
         return ('audio/' + audioCategoryName + '/' + audioFileName).replace(' ', '-'); // Convert spaces to dashes
     }
-	
+
 
     render() {
 
-		
+
         return(
             <div>
                 <Text textData={this.props.textData} activeTab={this.props.activeTab}
                     textCategoryNum={this.props.textCategoryNum} textCategories={this.props.textCategories} textFiles={this.props.textFiles}/>
 
-                <Image />
+                <Image imageCategory={this.props.imageCategories[this.props.imageCategoryNum]} activeTab={this.props.activeTab}/>
 
                 <Audio path={this.getAudioPath()} refCallback={this.props.refCallback}/>
             </div>

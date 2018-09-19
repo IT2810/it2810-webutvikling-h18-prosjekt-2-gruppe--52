@@ -10,7 +10,7 @@ class App extends Component {
         super(props);
 
         let textCategories = ['commercial', 'philosophical', 'shouts'], // TODO: change these to actual category strings
-            imageCategories = ['imagecat1', 'imagecat2', 'imagecat3'], // TODO: change these to actual category strings
+            imageCategories = ['Abstract', 'Icons', 'Mixed bag'], // TODO: change these to actual category strings
             audioCategories = ['household item', 'spooky', 'vehicles'];
 
         this.state = {
@@ -28,7 +28,7 @@ class App extends Component {
                 ['philosophical1.json', 'philosophical2.json', 'philosophical3.json', 'philosophical4.json'],
                 ['shouts1.json', 'shouts2.json', 'shouts3.json', 'shouts4.json']
             ],
-			
+
             textData: [
 				["","","",""],
 				["","","",""],
@@ -53,7 +53,7 @@ class App extends Component {
     }
 
     render() {
-		
+
         return (
 
             <div className="App">
@@ -129,18 +129,18 @@ class App extends Component {
 		console.log("Category: "+this.state.textCategoryNum);
         this.setState({
             activeTab: tabNumber,
-			
-        },			
+
+        },
 			() => {this.audioRef.load(); this.saveText(this.state.textCategoryNum,tabNumber);},
-			
-			
+
+
         );
-		
-		
+
+
 
     };
-	
-    
+
+
 	saveText(categoryNum, tabNumber) {
 		if(this.state.textData[categoryNum][tabNumber-1]!=""){
 			return;
@@ -149,17 +149,17 @@ class App extends Component {
 		fetch("text/"+this.state.textCategories[categoryNum]+"/"+this.state.textFiles[categoryNum][tabNumber-1]).then(response => response.json())
 		.then(result => stateCopy.textData[categoryNum][tabNumber-1]=result.tekst).then(a => this.setState(stateCopy)).catch(error => console.log(error));
 		}
-		
-	
+
+
 	componentDidMount(){
 		let stateCopy = Object.assign({}, this.state);
 		fetch("text/"+this.state.textCategories[0]+"/"+this.state.textFiles[0][0]).then(response => response.json())
 		.then(result => stateCopy.textData[0][0]=result.tekst).then(a => this.setState(stateCopy));
-		
-		}		
-	
 
-    
+		}
+
+
+
 
     saveImage(categoryNum, tabNumber) {
 
