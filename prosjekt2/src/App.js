@@ -9,8 +9,8 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        let textCategories = ['commercial', 'philosophical', 'shouts'], // TODO: change these to actual category strings
-            imageCategories = ['Abstract', 'Icons', 'Mixed bag'], // TODO: change these to actual category strings
+        let textCategories = ['commercial', 'philosophical', 'shouts'],
+            imageCategories = ['circles', 'squares', 'triangles'],
             audioCategories = ['household item', 'spooky', 'vehicles'];
 
         this.state = {
@@ -20,12 +20,12 @@ class App extends Component {
             imageCategoryNum: 0,
             audioCategoryNum: 0,
 
-            textCategories: ['commercial', 'philosophical', 'shouts'], // TODO: change these to actual category strings
-            imageCategories: imageCategories, // TODO: change these to actual category strings
+            textCategories: ['commercial', 'philosophical', 'shouts'],
+            imageCategories: ['circles', 'squares', 'triangles'],
             audioCategories: ['household item', 'spooky', 'vehicles'],
 
-            textFiles: [ // TODO: when changing category strings, make these names the same
-                ['commercial1.json', 'commercial2.json', 'commercial3.json', 'commercial4.json'], // TODO: make these the actual file names
+            textFiles: [
+                ['commercial1.json', 'commercial2.json', 'commercial3.json', 'commercial4.json'],
                 ['philosophical1.json', 'philosophical2.json', 'philosophical3.json', 'philosophical4.json'],
                 ['shouts1.json', 'shouts2.json', 'shouts3.json', 'shouts4.json']
             ],
@@ -37,9 +37,9 @@ class App extends Component {
 			],
 
             imageFiles: [ // TODO: when changing category strings, make these names the same
-                ['file1', 'file2', 'file3', 'file4'], // TODO: make these the actual file names
-                ['file1', 'file2', 'file3', 'file4'],
-                ['file1', 'file2', 'file3', 'file4']
+                ['1.svg', '2.svg', '3.svg', '4.svg'],
+                ['1.svg', '2.svg', '3.svg', '4.svg'],
+                ['1.svg', '2.svg', '3.svg', '4.svg']
             ],
             imageData: Array(3).fill(Array(4).fill(null)),
 
@@ -124,7 +124,9 @@ class App extends Component {
     };
 
     changeImageCategory = (categoryNum) => {
-        this.setState({imageCategoryNum: categoryNum});
+        this.setState({imageCategoryNum: categoryNum},
+            this.saveImage
+        );
     };
 
     changeAudioCategory = (categoryNum) => {
@@ -136,7 +138,7 @@ class App extends Component {
 
         this.setState({activeTab: tabNumber},
 
-			() => {this.audioRef.load(); this.saveText()}
+			() => {this.audioRef.load(); this.saveText(); this.saveImage()}
         );
     };
 
@@ -163,13 +165,27 @@ class App extends Component {
 
 	componentDidMount(){
 	    this.saveText();
+	    this.saveImage();
 	}
 
+    saveImage() {
+        let imageIsNotSaved = this.state.imageData[this.state.imageCategoryNum][this.state.activeTab-1] === null;
 
+        if (imageIsNotSaved) {
 
-
-    saveImage(categoryNum, tabNumber) {
-
+            let imagePath = `/img/${this.state.imageCategories[this.state.imageCategoryNum]}/${this.state.imageFiles[this.state.imageCategoryNum][this.state.activeTab - 1]}`;
+            fetch(imagePath)
+                .then(resp => resp.text())
+                .then(data => {
+                    console.log(imagePath);
+                    let newImageData = this.state.imageData.slice();
+                    newImageData[this.state.imageCategoryNum][this.state.activeTab - 1] = data;
+                    this.setState(
+                        {
+                            imageData: newImageData,
+                        });
+                });
+        }
     }
 
 }

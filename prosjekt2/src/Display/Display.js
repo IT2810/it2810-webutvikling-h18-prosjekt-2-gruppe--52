@@ -24,7 +24,8 @@ class Display extends Component {
                 <Text textData={this.props.textData} activeTab={this.props.activeTab}
                     textCategoryNum={this.props.textCategoryNum} textCategories={this.props.textCategories} textFiles={this.props.textFiles}/>
 
-                <Image imageCategory={this.props.imageCategories[this.props.imageCategoryNum]} activeTab={this.props.activeTab}/>
+                <Image imageData={this.props.imageData}
+                    imageCategoryNum={this.props.imageCategoryNum} activeTab={this.props.activeTab}/>
 
                 <Audio path={this.getAudioPath()} refCallback={this.props.refCallback}/>
             </div>
