@@ -5,7 +5,11 @@ class Image extends Component {
 
     render() {
         return(
-            <img src={"img/" + this.props.imageCategory + "/" + this.props.activeTab + ".svg"} />
+			<div>
+            <svg width="100px" height="100px">
+				<circle cx="50pc" cy="40"/>
+			</svg>
+			</div>
         );
     }
 }
