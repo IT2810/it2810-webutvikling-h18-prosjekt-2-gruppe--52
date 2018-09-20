@@ -15,6 +15,8 @@ class Choices extends Component {
     render() {
         return(
             <div className='Choices'>
+				
+				<h4>Velg kategoirer:</h4>
 
                 <Choice
                     fileType={this.props.textChoiceData.fileType}

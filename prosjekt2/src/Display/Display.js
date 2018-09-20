@@ -20,7 +20,7 @@ class Display extends Component {
 
 
         return(
-            <div>
+            <div className="Display">
                 <Text textData={this.props.textData} activeTab={this.props.activeTab}
                     textCategoryNum={this.props.textCategoryNum} textCategories={this.props.textCategories} textFiles={this.props.textFiles}/>
 

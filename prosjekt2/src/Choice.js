@@ -54,7 +54,7 @@ class Choice extends Component {
     render() {
 
         return (
-            <form>
+            <form className="Choice">
                 {this.renderRadioButtons()}
             </form>
         )

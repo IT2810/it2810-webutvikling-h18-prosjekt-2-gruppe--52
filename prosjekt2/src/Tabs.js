@@ -23,7 +23,7 @@ class Tabs extends Component {
 
     render() {
         return(
-            <div>
+            <div className="Tabs">
                 {this.renderTab(1)}
                 {this.renderTab(2)}
                 {this.renderTab(3)}

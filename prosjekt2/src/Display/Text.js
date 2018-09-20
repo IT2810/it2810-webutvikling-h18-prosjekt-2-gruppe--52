@@ -7,7 +7,7 @@ class Text extends Component {
     render() {
 		
         return(
-            <p>
+            <p className="Item">
 			{this.props.textData[this.props.textCategoryNum][this.props.activeTab-1]}
 			</p>
 		

@@ -3,7 +3,7 @@ import './App.css';
 import Choices from './Choices';
 import Tabs from './Tabs';
 import Display from './Display/Display';
-
+import './index.css';
 
 class App extends Component {
     constructor(props) {
@@ -41,7 +41,11 @@ class App extends Component {
                 ['1.svg', '2.svg', '3.svg', '4.svg'],
                 ['1.svg', '2.svg', '3.svg', '4.svg']
             ],
-            imageData: Array(3).fill(Array(4).fill(null)),
+            imageData: [
+				["","","",""],
+				["","","",""],
+				["","","",""]
+			],
 
             audioFiles: [
                 ['refrigerator.mp3', 'scissors.mp3', 'soda-can-opening.mp3', 'twisting-ziplock-bag.mp3'],
@@ -58,7 +62,7 @@ class App extends Component {
         return (
 
             <div className="App">
-
+				<h1>Kunstutstilling</h1>
                 <Choices
                     textChoiceData={
                         {
@@ -87,7 +91,7 @@ class App extends Component {
                     activeTab={this.state.activeTab}
                     changeTab={this.changeTab}/>
 
-                <Display
+                <Display className="Display"
                     textFiles={this.state.textFiles}
                     textData={this.state.textData}
                     textCategories={this.state.textCategories}
@@ -113,9 +117,6 @@ class App extends Component {
         );
     }
 
-    updateText = () => {
-
-    };
 
     changeTextCategory = (categoryNum) => {
         this.setState({textCategoryNum: categoryNum},
@@ -169,7 +170,7 @@ class App extends Component {
 	}
 
     saveImage() {
-        let imageIsNotSaved = this.state.imageData[this.state.imageCategoryNum][this.state.activeTab-1] === null;
+        let imageIsNotSaved = this.state.imageData[this.state.imageCategoryNum][this.state.activeTab-1] === "";
 
         if (imageIsNotSaved) {
 

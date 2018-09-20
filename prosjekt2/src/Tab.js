@@ -4,12 +4,15 @@ function Tab(props) {
     /* props:
             activity: string, either active or inactive
             tabNumber: int
-            changeTab: function(int) */
+            changeTab: function(int)
+			*/
 
     return (
+		<div className="Tab">
         <button className={'Tab '+props.activity} onClick={() => props.changeTab(props.tabNumber)}>
-            {'Tab ' + props.tabNumber}
+            {'Utstilling ' + props.tabNumber}
         </button>
+		</div>
     );
 }
 
