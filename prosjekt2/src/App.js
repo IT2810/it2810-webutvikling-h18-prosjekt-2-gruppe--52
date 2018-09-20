@@ -14,6 +14,7 @@ class App extends Component {
             audioCategories = ['household item', 'spooky', 'vehicles'];
 
         this.state = {
+
             activeTab: 1,
             textCategoryNum: 0,
             imageCategoryNum: 0,
@@ -112,8 +113,14 @@ class App extends Component {
         );
     }
 
+    updateText = () => {
+
+    };
+
     changeTextCategory = (categoryNum) => {
-        this.setState({textCategoryNum: categoryNum});
+        this.setState({textCategoryNum: categoryNum},
+            this.saveText
+        );
     };
 
     changeImageCategory = (categoryNum) => {
@@ -126,37 +133,37 @@ class App extends Component {
     };
 
     changeTab = (tabNumber) => {
-		console.log("Category: "+this.state.textCategoryNum);
-        this.setState({
-            activeTab: tabNumber,
 
-        },
-			() => {this.audioRef.load(); this.saveText(this.state.textCategoryNum,tabNumber);},
+        this.setState({activeTab: tabNumber},
 
-
+			() => {this.audioRef.load(); this.saveText()}
         );
-
-
-
     };
 
 
-	saveText(categoryNum, tabNumber) {
-		if(this.state.textData[categoryNum][tabNumber-1]!=""){
-			return;
-		}
-		let stateCopy = Object.assign({}, this.state);
-		fetch("text/"+this.state.textCategories[categoryNum]+"/"+this.state.textFiles[categoryNum][tabNumber-1]).then(response => response.json())
-		.then(result => stateCopy.textData[categoryNum][tabNumber-1]=result.tekst).then(a => this.setState(stateCopy)).catch(error => console.log(error));
-		}
+	saveText() {
+        let textIsNotSaved = this.state.textData[this.state.textCategoryNum][this.state.activeTab-1] === "";
+
+        if (textIsNotSaved) {
+
+            let textPath = `/text/${this.state.textCategories[this.state.textCategoryNum]}/${this.state.textFiles[this.state.textCategoryNum][this.state.activeTab - 1]}`;
+            fetch(textPath)
+                .then(resp => resp.json())
+                .then(data => {
+                    let newTextData = this.state.textData.slice();
+                    newTextData[this.state.textCategoryNum][this.state.activeTab - 1] = data.tekst;
+                    this.setState(
+                        {
+                            textData: newTextData,
+                        });
+                });
+        }
+	}
 
 
 	componentDidMount(){
-		let stateCopy = Object.assign({}, this.state);
-		fetch("text/"+this.state.textCategories[0]+"/"+this.state.textFiles[0][0]).then(response => response.json())
-		.then(result => stateCopy.textData[0][0]=result.tekst).then(a => this.setState(stateCopy));
-
-		}
+	    this.saveText();
+	}
 
 
 
