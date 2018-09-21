@@ -18,6 +18,11 @@ class Image extends Component {
 			
         );
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        let svgString = nextProps.imageData[nextProps.imageCategoryNum][nextProps.activeTab-1];
+        return svgString !== "";
+    }
 }
 
 export default Image;

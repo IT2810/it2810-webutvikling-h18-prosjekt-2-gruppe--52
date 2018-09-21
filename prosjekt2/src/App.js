@@ -62,34 +62,37 @@ class App extends Component {
         return (
 
             <div className="App">
-				<h1>Kunstutstilling</h1>
-                <Choices
-                    textChoiceData={
-                        {
-                            fileType: 'text',
-                            categories: this.state.textCategories,
-                            changeFunction: this.changeTextCategory
-                        }
-                    }
-                    imageChoiceData={
-                        {
-                            fileType: 'image',
-                            categories: this.state.imageCategories,
-                            changeFunction: this.changeImageCategory
-                        }
-                    }
-                    audioChoiceData={
-                        {
-                            fileType: 'audio',
-                            categories: this.state.audioCategories,
-                            changeFunction: this.changeAudioCategory
-                        }
-                    }
-                />
+				<h1>Moderne Kunstutstilling</h1>
 
-                <Tabs
-                    activeTab={this.state.activeTab}
-                    changeTab={this.changeTab}/>
+                <div className="ChoicesAndTabs">
+                    <Choices
+                        textChoiceData={
+                            {
+                                fileType: 'text',
+                                categories: this.state.textCategories,
+                                changeFunction: this.changeTextCategory
+                            }
+                        }
+                        imageChoiceData={
+                            {
+                                fileType: 'image',
+                                categories: this.state.imageCategories,
+                                changeFunction: this.changeImageCategory
+                            }
+                        }
+                        audioChoiceData={
+                            {
+                                fileType: 'audio',
+                                categories: this.state.audioCategories,
+                                changeFunction: this.changeAudioCategory
+                            }
+                        }
+                    />
+
+                    <Tabs
+                        activeTab={this.state.activeTab}
+                        changeTab={this.changeTab}/>
+                </div>
 
                 <Display className="Display"
                     textFiles={this.state.textFiles}
@@ -165,6 +168,7 @@ class App extends Component {
 
 
 	componentDidMount(){
+	    document.title = "Moderne kunstutstilling";
 	    this.saveText();
 	    this.saveImage();
 	}

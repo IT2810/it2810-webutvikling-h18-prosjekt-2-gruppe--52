@@ -14,6 +14,10 @@ class Text extends Component {
         );
 		
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.textData[this.props.textCategoryNum][this.props.activeTab - 1] !== "";
+    }
 }
 
 export default Text;
